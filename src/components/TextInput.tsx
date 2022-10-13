@@ -1,4 +1,4 @@
-import type { InputHTMLAttributes, ReactNode } from "react";
+import { forwardRef, InputHTMLAttributes, ReactNode } from "react";
 import { Slot } from "@radix-ui/react-slot";
 
 export interface TextInputRootProps {
@@ -28,14 +28,17 @@ TextInputIcon.displayName = "TextInput.Icon";
 export interface TextInputInputProps
   extends InputHTMLAttributes<HTMLInputElement> {}
 
-function TextInputInput(props: TextInputInputProps) {
-  return (
-    <input
-      className="bg-transparent flex-1 text-gray-100 text-xs outline-none placeholder:text-gray-400"
-      {...props}
-    />
-  );
-}
+const TextInputInput = forwardRef<HTMLInputElement, TextInputInputProps>(
+  (props, ref) => {
+    return (
+      <input
+        ref={ref}
+        className="bg-transparent flex-1 text-gray-100 text-xs outline-none placeholder:text-gray-400"
+        {...props}
+      />
+    );
+  }
+);
 
 TextInputInput.displayName = "TextInput.Input";
 
